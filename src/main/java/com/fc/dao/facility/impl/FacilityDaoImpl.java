@@ -120,7 +120,7 @@ public class FacilityDaoImpl implements FacilityDao {
 	@Override
 	public List<FacilityDto> selectSearchedFacilitiesList(SearchDto searchDto) {
 		// TODO Auto-generated method stub
-		List<FacilityDto> searchedList = sqlSessionTemplate.selectList("select_searched_facility_list", searchDto);
+		List<FacilityDto> searchedList = sqlSessionTemplate.selectList("select_searched_facility_list2", searchDto);
 		return searchedList;
 	}
 }

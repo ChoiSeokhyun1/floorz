@@ -52,8 +52,8 @@ public class ReservationCalendarServiceImpl implements ReservationCalendarServic
 
 
 	@Override
-	public boolean checkDuplicateId(String loginId) {
-	    return reservationCalendarDao.isDuplicateId(loginId);
+	public boolean checkDuplicateId(ReservationCalendarDto reservationCalendarDto) {
+	    return reservationCalendarDao.isDuplicateId(reservationCalendarDto);
 	}
 
 

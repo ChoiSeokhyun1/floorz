@@ -52,9 +52,9 @@ public class ReservationCalendarDaoImpl implements ReservationCalendarDao{
 	}
 
 	@Override
-	public boolean isDuplicateId(String loginId) {
+	public boolean isDuplicateId(ReservationCalendarDto reservationCalendarDto) {
 		
-		int count = sqlSessionTemplate.selectOne("reservationCalendar_mapper.count_duplicate_id", loginId);
+		int count = sqlSessionTemplate.selectOne("reservationCalendar_mapper.count_duplicate_id", reservationCalendarDto);
 	    return count > 0;
 	}
 

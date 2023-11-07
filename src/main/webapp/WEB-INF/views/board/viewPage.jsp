@@ -38,8 +38,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<form method="POST" name="opinionForm" id="opinionForm">
-									<button type="button" class="likesBtn">추천하기</button>
-									<button type="button" class="reportBtn">신고하기</button>
+									<button type="button" class="likesBtn" <c:if test="${sessionScope.loginId eq null || sessionScope.loginId eq ''}">disabled</c:if>>추천하기</button>
+									<button type="button" class="reportBtn" <c:if test="${sessionScope.loginId eq null || sessionScope.loginId eq ''}">disabled</c:if>>신고하기</button>
 								</form>
 
 								<form id="updateForm" method="post">

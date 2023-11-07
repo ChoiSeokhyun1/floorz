@@ -179,6 +179,8 @@ public class MapServiceImpl implements MapService {
 	@Override
 	public List<FacilityDto> getSearchedFacilityList(SearchDto searchDto) {
 		// TODO Auto-generated method stub
+		String[] splittedKeyword = searchDto.getSearchTxt().split(" ");
+		searchDto.setSplittedKeyword(splittedKeyword);
 		List<FacilityDto> fcList = facilityDao.selectSearchedFacilitiesList(searchDto);
 		return fcList;
 	}

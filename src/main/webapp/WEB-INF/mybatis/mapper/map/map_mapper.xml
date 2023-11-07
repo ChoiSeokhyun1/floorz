@@ -22,17 +22,29 @@
 		from facility_info_detail d, facility_info f
 		where f.rsrcNo = #{fcCode} AND d.rsrcNo = f.rsrcNo
 	</select>
-	
-	<select id="select_searched_facility_list" parameterType="SearchDto" resultType="FacilityDto">
+
+	<select id="select_searched_facility_list2" parameterType="SearchDto" resultType="FacilityDto">
 		select rsrcNo,
 		rsrcNm, zip, addr, daddr, lot, lat, instUrlAddr, imgFileUrlAddr
 		from facility_info
+		where
 		<if test="searchKeyword == 'rsrcNm'">
-			where rsrcNm like '%'||#{searchTxt}||'%' 
+			<foreach collection="splittedKeyword" item="item" separator='OR'>
+				rsrcNm like'%'||#{item}||'%'
+			</foreach>
 		</if>
 		<if test="searchKeyword == 'addr'">
-			where addr like '%'||#{searchTxt}||'%' OR daddr like '%'||#{searchTxt}||'%'
+			<foreach collection="splittedKeyword" item="item" separator='OR'>
+				addr like '%'||#{item}||'%'
+			</foreach>
+			OR
+			<foreach collection="splittedKeyword" item="item" separator='OR'>
+				daddr like '%'||#{item}||'%'
+			</foreach>
 		</if>
+		AND rsrcNo NOT IN (select rsrcNo
+							from facility_info_detail
+							where rsvtNdlsYn = 'Y')
 	</select>
 
 	<insert id="insert_facility_from_api"

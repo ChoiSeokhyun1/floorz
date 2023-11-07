@@ -7,4 +7,5 @@ public class SearchDto {
 	String isChecked;
 	String searchTxt;
 	String searchKeyword;
+	String[] splittedKeyword;
 }

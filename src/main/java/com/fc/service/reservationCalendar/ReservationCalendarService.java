@@ -12,7 +12,7 @@ import com.fc.dto.reservationCalendar.ReservationCalendarDto;
 public interface ReservationCalendarService  {
 
 	//아이디 중복 검사
-	public boolean checkDuplicateId(String loginId)
+	public boolean checkDuplicateId(ReservationCalendarDto reservationCalendarDto)
 	;
 	public boolean checkMyReservation(String loginId);
 	

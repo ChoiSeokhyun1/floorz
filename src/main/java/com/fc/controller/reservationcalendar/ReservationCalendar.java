@@ -203,15 +203,15 @@ public class ReservationCalendar {
 		 @PostMapping("/Calendar4")
 		 public String calendar4(ReservationCalendarDto reservationCalendarDto,
 		         Model model, HttpSession session) {
-
 		     String loginId = (String) session.getAttribute("loginId");
 		     
 		     System.out.println("loginId: " + loginId);
 		     
 		     int totalPeopleCnt = reservationCalendarDto.getTotalPeopleCnt();
 
+		     reservationCalendarDto.setLoginId(loginId);
 		     // 중복 아이디 확인을 위한 쿼리 실행
-		     boolean isDuplicateId = reservationCalendarService.checkDuplicateId(loginId);
+		     boolean isDuplicateId = reservationCalendarService.checkDuplicateId(reservationCalendarDto);
 
 		     if (isDuplicateId) {
 		    	 	String no = (String) session.getAttribute("no");

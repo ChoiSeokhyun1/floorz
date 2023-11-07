@@ -3,6 +3,8 @@ package com.fc.controller.map;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fc.controller.board.BoardController;
 import com.fc.dto.facility.FacilityDto;
 import com.fc.dto.facility.SearchDto;
 import com.fc.service.map.MapService;
@@ -21,6 +24,8 @@ import com.fc.service.map.MapService;
 @Controller
 @PropertySource("/WEB-INF/properties/application.properties")
 public class MapController {
+	
+	private static final Logger log = LogManager.getLogger(MapController.class);
 	
 	@Value("${api.kakao.key}")
 	private String kakaoApiKey;
@@ -72,6 +77,7 @@ public class MapController {
 		if (txt.trim() == "") {
 			fcList = mapService.getFacilityList();
 		} else {
+			log.info("게시물 검색 시작");
 			fcList = mapService.getSearchedFacilityList(searchDto);
 		}
 		

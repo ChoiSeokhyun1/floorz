@@ -10,7 +10,7 @@ import com.fc.dto.reservationCalendar.ReservationCalendarDto;
 
 public interface ReservationCalendarDao {
 	
-	public boolean isDuplicateId(String loginId);
+	public boolean isDuplicateId(ReservationCalendarDto reservationCalendarDto);
 	
 	public boolean checkMyReservation(String loginId);
 	

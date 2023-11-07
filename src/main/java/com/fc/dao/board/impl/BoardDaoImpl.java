@@ -118,11 +118,15 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		int finalResult = 0;
 		try {
+			// 신고 혹은 추천 테이블에 값 넣기 시도
 		int result = sqlSessionTemplate.insert("insert_opinion_info", infoMap);
-			if (result == 1) {
+			if (result == 1) { // 넣을 수 있는 상황이면, 해당 게시글의 정보 업데이트
+				// 업데이트 성공하면 1을 리턴
 				finalResult = sqlSessionTemplate.update("update_board_infoCount", infoMap);
 			}
-		// 중복이 안돼서 좋아요를 누를 수 있는 상황이면
+		// 이미 테이블에 값(아이디, 신고타입, 게시글 번호)이 존재하는 경우
+		// (아이디, 신고타입, 게시글 번호)를 PK로 설정해놓아서 중복되는 경우 에러 발생
+		// 0을 리턴
 		} catch (DuplicateKeyException e) {
 			finalResult = 0;
 		}

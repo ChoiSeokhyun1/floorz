@@ -152,10 +152,18 @@
 								<td colspan="3">게시글이 등록되지 않았습니다</td>
 							</tr>
 						</c:if>
-						<c:forEach var="board" items="${cntBoardList}" begin="0" end="${fn:length(cntBoardList)}"
+						<c:choose>
+							<c:when test="${fn:length(cntBoardList) > 4}">
+								<c:set var="totalLength" value="4" />
+							</c:when>
+							<c:otherwise>
+								<c:set var="totalLength" value="${fn:length(cntBoardList)}" />
+							</c:otherwise>
+						</c:choose>
+						<c:forEach var="board" items="${cntBoardList}" begin="0" end="${totalLength}"
 							step="1">
 							<tr style="height: 44.73px;">
-								<td><a href="${path}/detail?postno=${board.postno}">
+								<td><a href="${path}/detail?postno=${board.postno}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100px;">
 										${board.title} </a></td>
 								<td>${board.writer}</td>
 								<td>${board.updatedate}</td>
@@ -171,9 +179,9 @@
 							</c:forEach>
 						</c:if>
 						<c:forEach var="board" items="${latestBoardList}" begin="0"
-							end="${fn:length(latestBoardList)}" step="1">
+							end="${totalLength}" step="1">
 							<tr>
-								<td><a href="${path}/detail?postno=${board.postno}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 50px;">
+								<td><a href="${path}/detail?postno=${board.postno}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100px;">
 										${board.title}</a></td>
 								<td>${board.writer}</td>
 								<td>${board.updatedate}</td>
